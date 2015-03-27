@@ -34,3 +34,6 @@ http://fernandayamamoto.com.br/
 * Browserify
 * Babel (6to5)
 * Maven
+* NPM
+
+# Instalação
