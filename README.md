@@ -24,6 +24,7 @@ http://fernandayamamoto.com.br/
 * Servlet 3.1
 * CDI
 * MongoDB
+* Morphia
 * Tomcat 7
 
 ### Ambiente
