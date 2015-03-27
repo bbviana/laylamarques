@@ -19,12 +19,10 @@ http://fernandayamamoto.com.br/
 ### Server
 
 * Java 8
-* JAX-RS
-* Jersey
+* JAX-RS, Jersey
 * Servlet 3.1
 * CDI
-* MongoDB
-* Morphia
+* MongoDB, Morphia
 * Tomcat 7
 
 ### Ambiente
@@ -37,3 +35,4 @@ http://fernandayamamoto.com.br/
 * NPM
 
 # Instalação
+TODO
