@@ -1,4 +1,4 @@
-package br.com.bbviana.laylamarques;
+package br.com.bbviana.laylamarques.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.glassfish.jersey.jackson.JacksonFeature;

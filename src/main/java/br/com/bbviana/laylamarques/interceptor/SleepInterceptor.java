@@ -8,8 +8,6 @@ import java.lang.reflect.Method;
 import static com.google.common.base.Objects.*;
 
 /**
- * TODO descobrir pq os interceptors nao estao funcionando
- *
  * @author bbviana
  */
 @Sleep

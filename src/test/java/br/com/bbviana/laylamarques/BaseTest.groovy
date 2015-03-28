@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals
  */
 abstract class BaseTest {
 
-    private static final String DATABASE = "touch-library-test"
+    private static final String DATABASE = "laylamarques-test"
 
     private static MongoClient mongo
 

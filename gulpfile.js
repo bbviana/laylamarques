@@ -4,7 +4,6 @@ var babelify = require("babelify");
 var concat = require('gulp-concat');
 var del = require('del');
 var gulp = require('gulp');
-var react = require('gulp-react');
 var reactify = require('reactify');
 var uglify = require('gulp-uglify');
 

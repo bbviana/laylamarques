@@ -5,9 +5,7 @@
     <groupId>br.com.bbviana</groupId>
     <artifactId>laylamarques</artifactId>
     <packaging>war</packaging>
-
     <version>1.0.0-SNAPSHOT</version>
-    <name>laylamarques</name>
 
     <dependencies>
         <!--CDI-->
@@ -119,7 +117,7 @@
 
 
     <build>
-        <finalName>touch-library</finalName>
+        <finalName>${project.artifactId}</finalName>
 
         <plugins>
             <plugin>
