@@ -25,6 +25,11 @@ gulp.task('clean:modules:app', function (cb) {
 gulp.task('copy:to:node_modules', function () {
     gulp.src(paths.src + '/**/*.js')
         .pipe(babel())
+        .on('error', function (err) {
+            console.error('Babel ERROR in ' + err.fileName);
+            console.error(err.message);
+            //this.end();
+        })
         .pipe(gulp.dest('node_modules/app'));
 });
 
@@ -37,7 +42,7 @@ gulp.task('browserify', ['copy:to:node_modules'], function () {
         .on('error', function (err) {
             console.error('JSX ERROR in ' + err.fileName);
             console.error(err.message);
-            this.end();
+            //this.end();
         })
         .pipe(concat('bundle.js'))
         .pipe(gulp.dest(paths.target));

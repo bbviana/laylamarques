@@ -1,109 +1,47 @@
 var ActionTypes = require('./ActionTypes');
-var BookClient = require('../client/BookClient');
-var FileClient = require('../client/FileClient');
-var dispatch = require('../flux/Dispatcher').dispatch;
-var invariant = require('../invariant');
+var BackgroundClient = require('app/client/BackgroundClient');
+var CategoryClient = require('app/client/CategoryClient');
+var ItemClient = require('app/client/ItemClient');
+var dispatch = require('app/flux/Dispatcher').dispatch;
+var invariant = require('app/utils/invariant');
 var navigate = require('react-mini-router').navigate;
 
 
 var ActionCreators = {
-    // TODO arrumar o scrollTop a navegar
-
-    changeBook: function (partialBook) {
-        dispatch({action: ActionTypes.CHANGE_BOOK, partialBook: partialBook});
-    },
-
-    insertBook: function (book) {
-        this.loading(true);
-        dispatch({action: ActionTypes.CREATE_BOOK, book: book});
-
-        BookClient
-            .insert(book)
-            .then(function (savedBook) {
-                dispatch({action: ActionTypes.RECEIVE_BOOK, book: savedBook});
-                navigate("/touch-library/books/" + savedBook.id);
-                ActionCreators.loading(false);
-            }, handleError);
-    },
-
-    updateBook: function (book) {
-        this.loading(true);
-        dispatch({action: ActionTypes.UPDATE_BOOK, book: book});
-
-        BookClient
-            .update(book)
-            .then(function (savedBook) {
-                dispatch({action: ActionTypes.RECEIVE_BOOK, book: savedBook});
-                navigate("/touch-library/books/" + savedBook.id);
-                ActionCreators.loading(false);
-            }, handleError);
-    },
-
-    loadBook: function (bookId) {
-        dispatch({action: ActionTypes.LOAD_BOOK, bookId: bookId});
-
-        if (!bookId) {
-            dispatch({action: ActionTypes.RECEIVE_BOOK, book: null});
-            return;
-        }
-
-        this.loading(true);
-        BookClient
-            .load(bookId)
-            .then(function (book) {
-                dispatch({action: ActionTypes.RECEIVE_BOOK, book: book});
-                ActionCreators.loading(false);
-            }, handleError);
-    },
-
-    loadBooks: function () {
-        this.loading(true);
-        dispatch({action: ActionTypes.LOAD_BOOKS});
-
-        BookClient
-            .loadAll()
+    loadBGImages: function () {
+        BackgroundClient
+            .all()
             .then(function (data) {
-                dispatch({action: ActionTypes.RECEIVE_BOOKS, books: data});
+                dispatch({action: ActionTypes.RECEIVE_BG_IMAGES, images: data});
+            }, handleError);
+    },
+
+    loadItemsByCategory: function (categoryId) {
+        this.loading(true);
+        dispatch({action: ActionTypes.LOAD_ITEMS_BY_CATEGORY, categoryId: categoryId});
+
+        ItemClient
+            .byCategory(categoryId)
+            .then(function (data) {
+                dispatch({action: ActionTypes.RECEIVE_ITEMS, items: data});
                 ActionCreators.loading(false);
             }, handleError);
+    },
 
+    loadCategories: function () {
+        this.loading(true);
+        dispatch({action: ActionTypes.LOAD_CATEGORIES});
+
+        CategoryClient
+            .all()
+            .then(function (data) {
+                dispatch({action: ActionTypes.RECEIVE_CATEGORIES, categories: data});
+                ActionCreators.loading(false);
+            }, handleError);
     },
 
     loading: function (loading) {
         dispatch({action: ActionTypes.CHANGE_LOADING, loading: loading});
-    },
-
-    removeBook: function (bookId) {
-        this.loading(true);
-        dispatch({action: ActionTypes.REMOVE_BOOK, bookId: bookId});
-
-        BookClient
-            .remove(bookId)
-            .then(function () {
-                navigate("/touch-library/");
-            }, handleError);
-    },
-
-    addFile: function () {
-        dispatch({action: ActionTypes.ADD_FILE});
-    },
-
-    removeFile: function (index) {
-        dispatch({action: ActionTypes.REMOVE_FILE, index: index});
-    },
-
-    uploadFile: function (name, file) {
-        dispatch({action: ActionTypes.UPLOAD_FILE});
-
-        FileClient.uploadFile({
-            file: file,
-            progress: function (data) {
-                dispatch({action: ActionTypes.UPLOAD_FILE_PROGRESS, name: name, progressStatus: data});
-            },
-            success: function (data) {
-                dispatch({action: ActionTypes.UPLOAD_FILE_SUCCESS, name: name, hash: data});
-            }
-        });
     }
 };
 

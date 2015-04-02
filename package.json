@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Portfolio Layla Marques",
   "author": "Bruno Viana bbviana@gmail.com.br",
-
   "dependencies": {
     "es6-promise": "~2.0.1",
     "jquery": "~2.1.3",

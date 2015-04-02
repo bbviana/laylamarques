@@ -20,6 +20,6 @@ var LoadingStore = createStore({
 function loading(payload) {
     isLoading = payload.loading;
     this.emitChange();
-};
+}
 
 module.exports = LoadingStore;

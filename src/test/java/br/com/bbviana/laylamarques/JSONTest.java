@@ -1,5 +1,6 @@
 package br.com.bbviana.laylamarques;
 
+import br.com.bbviana.laylamarques.delete.Book;
 import br.com.bbviana.laylamarques.files.DigitalFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bson.types.ObjectId;

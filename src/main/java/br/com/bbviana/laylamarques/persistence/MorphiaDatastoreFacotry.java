@@ -1,6 +1,6 @@
 package br.com.bbviana.laylamarques.persistence;
 
-import br.com.bbviana.laylamarques.Book;
+import br.com.bbviana.laylamarques.delete.Book;
 import br.com.bbviana.laylamarques.files.DigitalFile;
 import com.mongodb.MongoClient;
 import org.mongodb.morphia.Datastore;

@@ -1,14 +1,18 @@
 var React = require('react');
-var RouterMixin = require('react-mini-router').RouterMixin;
+var RouterMixin = require('react-mini-router-async').RouterMixin;
+var Promise = require('es6-promise').Promise;
 
-var Footer = require('app/components/structure/Footer');
-var Header = require('app/components/structure/Header');
-var LoadingWindow = require('app/components/structure/LoadingWindow');
+var AddressSection = require('./AddressSection');
+var Background = require('./Background');
+var ItemList = require('./ItemList');
+var LoadingWindow = require('./LoadingWindow');
+var Logo = require('./Logo');
+var Menu = require('./Menu');
+var SocialInfoSection = require('./SocialInfoSection');
 
-var ScreenBookDetails = require('app/components/details/ScreenBookDetails');
-var ScreenBookList = require('app/components/list/ScreenBookList');
-var ScreenCreateBook = require('app/components/form/ScreenCreateBook');
-var ScreenEditBook = require('app/components/form/ScreenEditBook');
+// TODO mocks: apagar
+var BGImages = require('../mock/BGImages');
+var Categories = require('../mock/Categories');
 
 
 var App = React.createClass({
@@ -16,22 +20,26 @@ var App = React.createClass({
 
     routes: {
         '/': 'home',
-        '/books/create': 'create',
-        '/books/edit/:id': 'edit',
-        '/books/:id': 'details'
+        '/categories/:id': {
+            fetcher: 'loadItemsByCategory',
+            handler: 'itemList'
+        }
+    },
+    home() {
+        return null;
     },
 
-    home() {
-        return <ScreenBookList />
+    loadItemsByCategory(id){
+        return new Promise(function(resolve, reject){
+            console.log("loadItemsByCategory");
+
+            resolve();
+        });
+
     },
-    create() {
-        return <ScreenCreateBook />
-    },
-    details(id) {
-        return <ScreenBookDetails bookId={id} />
-    },
-    edit(id) {
-        return <ScreenEditBook bookId={id}/>
+
+    itemList() {
+        return <ItemList />
     },
 
     render() {
@@ -40,11 +48,18 @@ var App = React.createClass({
         return (
             <div style={_.container}>
                 <LoadingWindow />
-                <Header />
+                <Background images={BGImages}/>
+
+                <div style={_.sideMenu}>
+                    <Logo />
+                    <Menu categories={Categories}/>
+                    <SocialInfoSection />
+                    <AddressSection />
+                </div>
+
                 <div style={_.center}>
                     {this.renderCurrentRoute()}
                 </div>
-                <Footer />
             </div>
         );
     }
@@ -52,13 +67,22 @@ var App = React.createClass({
 
 var _ = {
     container: {
-        background: '#e5e5e5',
-        minHeight: '100%',
-        paddingBottom: 100, // footer
+        height: '100%',
         position: 'relative'
     },
     center: {
-        marginTop: 25
+        //border: '1px solid blue',
+        height: '100%',
+        marginLeft: 240 // sideMenu.width
+    },
+    sideMenu: {
+        //border: '1px solid red',
+        height: '100%',
+        left: 0,
+        padding: 50,
+        position: 'absolute',
+        top: 0,
+        width: 240
     }
 };
 

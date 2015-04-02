@@ -1,29 +1,87 @@
-input[type=date] {
-    line-height: inherit;
+/*************************
+* RESETS
+**************************/
+html, body, #app {
+    height: 100%;
 }
 
-.icon-spin {
-    -webkit-animation: icon-spin 2s infinite linear;
-    animation: icon-spin 2s infinite linear;
+body {
+    margin: 0;
+    min-width: 1024px;
 }
 
-@-webkit-keyframes icon-spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
-@keyframes icon-spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
+
+/*************************
+* BASIC
+**************************/
+html {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+/*************************
+* UTILS
+**************************/
+.no-text-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+
+/*************************
+* MENU
+**************************/
+#menu {
+    margin: 50px 0;
+}
+
+#menu .menu-title {
+    background: #FFF;
+    color: inherit;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+#menu .menu-title:hover {
+    background-color: rgba(158, 21, 48, 0.7) !important;
+    color: #FFFFFF !important;
+}
+
+#menu .menu-sub {
+    margin-bottom: 10px;
+}
+
+#menu .menu-sub .menu-title {
+    margin-bottom: 0;
+    display: block;
+}
+
+/*************************
+* ANIMATIONS
+**************************/
+.carousel-enter {
+    opacity: 0.3;
+    transition: opacity .7s ease-in;
+}
+
+.carousel-enter.carousel-enter-active {
+    opacity: 1;
+}
+
+.carousel-leave {
+    opacity: 1;
+    transition: opacity .7s ease-in;
+}
+
+.carousel-leave.carousel-leave-active {
+    opacity: 0.01;
 }

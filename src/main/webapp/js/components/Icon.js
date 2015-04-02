@@ -6,9 +6,9 @@ var Icon = React.createClass({
         name: PropTypes.string.isRequired
     },
 
-    render: function () {
+    render() {
         return (
-            <i className={"glyphicon glyphicon-" + this.props.name}></i>
+            <i className={"fa fa-" + this.props.name}></i>
         );
     }
 });

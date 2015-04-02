@@ -1,5 +1,6 @@
 package br.com.bbviana.laylamarques
 
+import br.com.bbviana.laylamarques.delete.Book
 import br.com.bbviana.laylamarques.files.DigitalFile
 import com.mongodb.MongoClient
 import org.junit.AfterClass
