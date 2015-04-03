@@ -1,7 +1,4 @@
 var ActionTypes = require('./ActionTypes');
-var BackgroundClient = require('app/client/BackgroundClient');
-var CategoryClient = require('app/client/CategoryClient');
-var ItemClient = require('app/client/ItemClient');
 var dispatch = require('app/flux/Dispatcher').dispatch;
 var invariant = require('app/utils/invariant');
 var navigate = require('react-mini-router').navigate;

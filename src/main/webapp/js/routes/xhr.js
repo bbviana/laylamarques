@@ -3,9 +3,13 @@ var $ = require('jquery');
 var assign = require('object-assign');
 
 var xhr = {
-    promise(settings) {
+    get(url, settings) {
         return new Promise(function (resolve, reject) {
-            var completeSettings = assign({}, settings, {
+            var completeSettings = assign(settings, {
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+
                 success(data) {
                     resolve(data);
                 },
@@ -27,13 +31,13 @@ var xhr = {
 var MockServer = require('app/mock/Server');
 
 var xhrMock = {
-    promise(settings) {
+    get(url, settings) {
         return new Promise(function (resolve, reject) {
-            var data = MockServer(settings.url);
+            var data = MockServer(url);
 
             setTimeout(function(){
                 resolve(data);
-            }, 1000);
+            }, 500);
         });
     }
 };

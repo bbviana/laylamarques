@@ -2,22 +2,29 @@ var React = require('react');
 var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
 
 var LoadingStore = require('app/stores/LoadingStore');
-var StoreWatchMixin = require('app/mixins/StoreWatchMixin');
-
 
 var LoadingWindow = React.createClass({
-    mixins: [PureRenderMixin, StoreWatchMixin(LoadingStore)],
+    mixins: [PureRenderMixin],
 
-    getStateFromStores() {
-        return {
-            loading: LoadingStore.isLoading()
-        };
+    //getInitialState() {
+    //    return {loading: false}
+    //},
+
+    //componentDidMount() {
+    //    window.addEventListener("loading", this._setLoading);
+    //},
+    //componentWillUnmount() {
+    //    window.removeEventListener("loading", this._setLoading);
+    //},
+
+    _setLoading(e){
+        this.setState({loading: e.loading});
     },
 
     render() {
         console.log("LoadingWindow:render");
 
-        if (!this.state.loading) {
+        if (!this.props.loading) {
             return null;
         }
 

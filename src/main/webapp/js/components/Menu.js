@@ -65,7 +65,7 @@ var LinkMenu = React.createClass({
     render() {
         var item = this.props.item;
 
-        return <a className="menu-title"  href={"/laylamarques/categories/" + item.id}>{item.name}</a>
+        return <a className="menu-title"  href={"/laylamarques/items/category/" + item.id}>{item.name}</a>
     }
 });
 

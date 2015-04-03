@@ -1,6 +1,6 @@
 var React = require('react');
-var RouterMixin = require('react-mini-router-async').RouterMixin;
-var Promise = require('es6-promise').Promise;
+var FetcherMixin = require('app/routes/FetcherMixin');
+var Route = require('app/routes/Route');
 
 var AddressSection = require('./AddressSection');
 var Background = require('./Background');
@@ -16,38 +16,14 @@ var Categories = require('../mock/Categories');
 
 
 var App = React.createClass({
-    mixins: [RouterMixin],
-
-    routes: {
-        '/': 'home',
-        '/categories/:id': {
-            fetcher: 'loadItemsByCategory',
-            handler: 'itemList'
-        }
-    },
-    home() {
-        return null;
-    },
-
-    loadItemsByCategory(id){
-        return new Promise(function(resolve, reject){
-            console.log("loadItemsByCategory");
-
-            resolve();
-        });
-
-    },
-
-    itemList() {
-        return <ItemList />
-    },
+    mixins: [FetcherMixin({items: []})],
 
     render() {
         console.log("App:render");
 
         return (
             <div style={_.container}>
-                <LoadingWindow />
+                <LoadingWindow loading={this.state.loading}/>
                 <Background images={BGImages}/>
 
                 <div style={_.sideMenu}>
@@ -58,7 +34,12 @@ var App = React.createClass({
                 </div>
 
                 <div style={_.center}>
-                    {this.renderCurrentRoute()}
+                    <Route path="/">
+                        <span>Home</span>
+                    </Route>
+                    <Route path="items/categories/:id">
+                        <ItemList items={this.state.items}/>
+                    </Route>
                 </div>
             </div>
         );
@@ -86,4 +67,11 @@ var _ = {
     }
 };
 
-module.exports = App;
+class Sub extends App {
+
+    render(){
+        console.log("render");
+        return super.render();
+    }
+}
+module.exports = Sub;
