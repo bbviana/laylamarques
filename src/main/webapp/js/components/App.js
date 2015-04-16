@@ -1,10 +1,11 @@
 var React = require('react');
-var FetcherMixin = require('app/routes/FetcherMixin');
-var Route = require('app/routes/Route');
+var FetcherMixin = require('app/utils/FetcherMixin');
+var Route = require('app/utils/Route');
 
 var AddressSection = require('./AddressSection');
 var Background = require('./Background');
 var ItemList = require('./ItemList');
+
 var LoadingWindow = require('./LoadingWindow');
 var Logo = require('./Logo');
 var Menu = require('./Menu');
@@ -26,6 +27,8 @@ var App = React.createClass({
                 <LoadingWindow loading={this.state.loading}/>
                 <Background images={BGImages}/>
 
+                <div style={{color:"#FFF"}}>Hello 2</div>
+
                 <div style={_.sideMenu}>
                     <Logo />
                     <Menu categories={Categories}/>
@@ -37,14 +40,16 @@ var App = React.createClass({
                     <Route path="/">
                         <span>Home</span>
                     </Route>
-                    <Route path="items/categories/:id">
-                        <ItemList items={this.state.items}/>
+                    <Route path="items/category/:id">
+                        <ItemList query="items/category/11" items={[]}/>
                     </Route>
                 </div>
             </div>
         );
     }
 });
+
+//<ItemList items={this.state.items}/>
 
 var _ = {
     container: {
@@ -67,11 +72,4 @@ var _ = {
     }
 };
 
-class Sub extends App {
-
-    render(){
-        console.log("render");
-        return super.render();
-    }
-}
-module.exports = Sub;
+module.exports = App;

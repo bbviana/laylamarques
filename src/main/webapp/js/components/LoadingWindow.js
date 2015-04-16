@@ -1,7 +1,5 @@
-var React = require('react');
-var PureRenderMixin = require('react/addons').addons.PureRenderMixin;
-
-var LoadingStore = require('app/stores/LoadingStore');
+var React = require('react/addons');
+var PureRenderMixin = React.addons.PureRenderMixin;
 
 var LoadingWindow = React.createClass({
     mixins: [PureRenderMixin],

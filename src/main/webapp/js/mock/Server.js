@@ -1,6 +1,7 @@
 module.exports = function (url) {
     switch (url) {
         case 'http://localhost:8080/laylamarques/items/category/11':
+        case 'items/category/11':
             return {
                 items: [
                     'img/cat1/1410522014_tb.jpg',

@@ -1,5 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var Fetcher = require('app/utils/Fetcher');
 
 var Img = require('./Img');
 
@@ -23,4 +24,4 @@ var _ = {
     }
 };
 
-module.exports = ItemList;
+module.exports = Fetcher.wrap(ItemList);

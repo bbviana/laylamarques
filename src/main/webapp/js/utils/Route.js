@@ -7,9 +7,8 @@ var Route = React.createClass({
     },
 
     render() {
-        var isPathMath = false;
+        var isPathMath = true;
 
-        // usar  React.createElement(LoadingWindow, null),
         return isPathMath ? this.props.children : null;
     }
 });
