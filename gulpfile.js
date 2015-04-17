@@ -1,60 +1,50 @@
-var browserify = require('gulp-browserify');
-var babel = require("gulp-babel");
 var babelify = require("babelify");
-var concat = require('gulp-concat');
-var del = require('del');
+var browserify = require('browserify');
 var gulp = require('gulp');
-var reactify = require('reactify');
-var uglify = require('gulp-uglify');
+var gutil = require('gulp-util');
+var notifier = require("node-notifier");
+var source = require('vinyl-source-stream');
+var watchify = require('watchify');
 
 var paths = {
-    src: 'src/main/webapp/js',
-    target: 'target/laylamarques/js'
+    src: './src/main/webapp/node_modules',
+    target: './target/laylamarques/js'
 };
 
-var reactifyES6 = function (file) {
-    return reactify(file, {'es6': true});
-};
+gulp.task('browserify', function () {
+    var bundler = browserify({
+        entries: [paths.src + '/main.js'], // Only need initial file, browserify finds the deps
+        transform: [babelify], /// es6 to es5 + reactify
+        debug: true, // Gives us sourcemapping
+        cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
+    });
+    var watcher = watchify(bundler);
 
-gulp.task('clean:modules:app', function (cb) {
-    del(['node_modules/app/**'], cb)
+    var bundle = function () {
+        watcher.bundle()
+            .on('error', function (error) {
+                gutil.log(gutil.colors.red(error.message));
+                notifier.notify({
+                    title: 'Error',
+                    message: 'Check console for details'
+                })
+            })
+            .pipe(source('bundle.js'))
+            .pipe(gulp.dest(paths.target))
+    };
+
+    watcher.on('time', function (time) {
+        gutil.log('Bundle Gerado', gutil.colors.magenta(time + 'ms'));
+        notifier.notify({
+            title: 'Bundle Gerado',
+            message: time + 'ms'
+        });
+    });
+
+    // When any files update
+    watcher.on('update', bundle);
+
+    return bundle();
 });
-
-gulp.task('clean:bundlejs', function (cb) {
-    del(paths.target + "/bundle.js", cb)
-});
-
-
-// permite usar require('app/...') e evita que tenhamos que usar require('../../../../')
-gulp.task('copy:to:node_modules', function () {
-    gulp.src(paths.src + '/**/*.js')
-        .pipe(babel())
-        .on('error', function (err) {
-            console.error('Babel ERROR in ' + err.fileName);
-            console.error(err.message);
-            this.end();
-        })
-        .pipe(gulp.dest('node_modules/app'));
-});
-
-gulp.task('browserify', ['clean:bundlejs', 'copy:to:node_modules'], function () {
-    gulp.src(paths.src + '/main.js')
-        .pipe(browserify({
-            transform: [babelify], // es6 to es5 + reactify
-            debug: true // gera source maps
-        }))
-        .on('error', function (err) {
-            console.error('JSX ERROR in ' + err.fileName);
-            console.error(err.message);
-            this.end();
-        })
-        .pipe(concat('bundle.js'))
-        .pipe(gulp.dest(paths.target));
-});
-
 
 gulp.task('default', ['browserify']);
-
-gulp.task('watch', function () {
-    gulp.watch(paths.src + '/**/*.js', ['default']);
-});
