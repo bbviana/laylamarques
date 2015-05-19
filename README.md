@@ -9,12 +9,12 @@ http://fernandayamamoto.com.br/
 ### Client
 
 * ReactJS
-* React Mini Router
-* Flux
 * Ecma Script 6
 * HTML 5
 * CSS 3
-* jQuery (?)
+* jQuery
+* Lightbox: http://photoswipe.com/
+* Router e Fetcher implementados no projeto
 
 ### Server
 
