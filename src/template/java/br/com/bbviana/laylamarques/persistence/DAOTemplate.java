@@ -1,6 +1,8 @@
-package br.com.bbviana.laylamarques.templates;
+package br.com.bbviana.laylamarques.persistence;
 
+import br.com.bbviana.laylamarques.imagens.Imagem;
 import br.com.bbviana.laylamarques.interceptor.Log;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -31,11 +33,15 @@ public class DAOTemplate {
 //    }
 
 //    public Entity find(String id) {
-//        return ds.get(Entity.class, new ObjectId(id));
+//        try {
+//            return ds.get(Entity.class, new ObjectId(id));
+//        } catch (Exception e) {
+//            throw new IllegalArgumentException(String.format("Imagem %s inexistente", id));
+//        }
 //    }
 
 //    public void remove(String id) {
-//        Entity entityToRemove = ds.get(Entity.class, new ObjectId(id));
-//        ds.delete(entityToRemove);
+//        Entity entity = ds.get(Entity.class, new ObjectId(id));
+//        ds.delete(entity);
 //    }
 }

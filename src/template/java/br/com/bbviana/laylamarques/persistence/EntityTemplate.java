@@ -1,4 +1,4 @@
-package br.com.bbviana.laylamarques;
+package br.com.bbviana.laylamarques.persistence;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -10,20 +10,14 @@ import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToStrin
 import static org.apache.commons.lang3.builder.ToStringStyle.SHORT_PREFIX_STYLE;
 
 /**
- * TODO categoria pai
- */
-
-/**
  * @author bbviana
  */
-@Entity("categories")
-public class Category {
+@Entity("COLLECTION_NAME")
+public class EntityTemplate {
 
     @Id
     @JsonSerialize(using = ToStringSerializer.class)
     private ObjectId id;
-
-    private String name;
 
     // <editor-fold desc="Object">
     @Override
@@ -35,21 +29,5 @@ public class Category {
 
     // <editor-fold desc="Getters e Setters">
 
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    // </editor-fold>+
+    // </editor-fold>
 }

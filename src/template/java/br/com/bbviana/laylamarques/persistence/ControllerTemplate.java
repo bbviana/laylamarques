@@ -1,4 +1,4 @@
-package br.com.bbviana.laylamarques.templates;
+package br.com.bbviana.laylamarques.persistence;
 
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Path;
