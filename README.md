@@ -1,11 +1,6 @@
 # laylamarques
 Portfolio Layla Marques
 
-# Progresso
-> Remover Mecanismo de fetch e usar algo simples. Sem firulas.
-> Vamos usar callbacks simples mesmo.
-
-
 ## Inspiração
 http://fernandayamamoto.com.br/
 
