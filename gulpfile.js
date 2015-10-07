@@ -1,8 +1,9 @@
 var babelify = require("babelify");
 var browserify = require('browserify');
+var connect = require('gulp-connect');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var livereload = require('gulp-livereload');
+// var livereload = require('gulp-livereload');
 var notifier = require("node-notifier");
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
@@ -43,12 +44,11 @@ var build = function (watch) {
             })
             .pipe(source('bundle.js'))
             .pipe(gulp.dest(paths.target))
-            .pipe(livereload());
+            .pipe(connect.reload());
+            // .pipe(livereload());
     };
 
     if (watch) {
-        livereload.listen();
-
         bundler = watchify(bundler);
 
         bundler
@@ -65,7 +65,14 @@ var build = function (watch) {
     return bundle();
 };
 
-gulp.task('browserify-nowatch', build.bind(this, false));
-gulp.task('browserify-watch', build.bind(this, true));
-gulp.task('watch', ['browserify-watch']);
-gulp.task('default', ['browserify-nowatch']);
+gulp.task('webserver', function() {
+    connect.server({
+        livereload: true,
+        port: 8000,
+        root: ['webapp']
+    });
+});
+
+gulp.task('nowatch', build.bind(this, false));
+gulp.task('watch', build.bind(this, true));
+gulp.task('default', ['webserver', 'watch']);
