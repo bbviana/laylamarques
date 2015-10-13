@@ -9,7 +9,7 @@ var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 
 var paths = {
-    src: './src/main/webapp/node_modules',
+    src: './src/main/js',
     target: './src/main/webapp/js'
     // target: './target/laylamarques/js'
 };
@@ -23,7 +23,7 @@ var build = function (watch) {
             babelify.configure({
                 stage: 0,
                 optional: ["es7.decorators"]
-            }),
+            })
         ],
         debug: true, // sourcemapping: TRUE em dev
         // cache, packageCache, fullPaths: necessários pra o watchify

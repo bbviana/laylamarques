@@ -1,4 +1,4 @@
-import db from 'db'
+import db from '../db'
 
 /*
  * url: /collection [/id] (/collection [/id])+
@@ -37,7 +37,7 @@ const xhr = {
     },
 
     // [DELETE] /categories/42, /categories/42/subCategories/20
-    delete(){
+    delete(url){
         return promise(() => {
             let {collection, element} = navigate(url);
             let index = collection.findIndex(element => element.id == element.id);
@@ -47,17 +47,23 @@ const xhr = {
     }
 }
 
-const REQUESTS_TIMEOUT_MS = 500;
+const REQUESTS_TIMEOUT_MS = window.REQUESTS_TIMEOUT_MS != null ? window.REQUESTS_TIMEOUT_MS : 500;
 
-function promise(url, callback){
+function promise(callback){
     return new Promise((resolve, reject) => {
         console.log("Requesting...");
 
-        setTimeout(() => {
+        let execute = () => {
             let data = callback();
             console.log("Response:", data);
             resolve(data);
-        }, REQUESTS_TIMEOUT_MS);
+        }
+
+        if(REQUESTS_TIMEOUT_MS > 0) {
+            setTimeout(execute, REQUESTS_TIMEOUT_MS);
+        } else {
+            execute();
+        }
     });
 }
 
@@ -81,20 +87,24 @@ function navigate(url){
         });
     }
 
-    let collection = db;
-    let element = null;
-    collectionsIds.forEach(ci => {
-        collection = collection[ci.collection];
-        if(ci.id){
-            if(!Array.isArray(collection)) throw new Error("");
+    let collection = null;
+    let element = db;
 
-            element = collection.find(it => it.id == ci.id);
+    for (let ci of collectionsIds) {
+        collection = element[ci.collection];
 
-            if(!element) throw new Error("Elemento ${ci} não encontrado");
+        if(!ci.id){
+            element = null;
+            break;
         }
-    });
 
-    if(collection === db) throw new Error("");
+        if(!Array.isArray(collection)) throw new Error("");
+
+        element = collection.find(it => it.id == ci.id);
+        if(!element) throw new Error("Elemento ${ci} não encontrado");
+    }
+
+    if(!collection) throw new Error("");
 
     return {collection, element};
 }
