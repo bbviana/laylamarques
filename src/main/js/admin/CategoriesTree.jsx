@@ -17,6 +17,10 @@ class CategoriesTree extends Component {
         )
     }
 
+    selectCategory = () => {
+    // PAREI AQUI    
+    }
+
     setCategories = categories => this.setState({categories})
 
     render = ({categories} = this.state) =>
@@ -104,7 +108,7 @@ const s = {
     },
 
     categoryCard: {
-        background: '#EAEAEA'
+        background: '#EABCEA'
     },
 
     form: {}

@@ -40,11 +40,42 @@ describe('xhrMock:bg-images', () => {
     )
 })
 
+describe('xhrMock:filters', () => {
+    const categories = db['categories']
+
+    pit('[GET] /categories?name=Artesanato', () =>
+        xhrMock.get('/categories?name=Artesanato').then(data => {
+            expect(data.id).toBe(3)
+            expect(data.name).toBe('Artesanato')
+        })
+    )
+
+    pit('[GET] /categories?name=Pinturas&id=2', () =>
+        xhrMock.get('/categories?name=Pinturas&id=2').then(data => {
+            expect(data.id).toBe(2)
+            expect(data.name).toBe('Pinturas')
+        })
+    )
+
+    pit('[GET] /categories?main=true', () =>
+        xhrMock.get('/categories?main=true').then(data => {
+            expect(data.length).toBe(5)
+        })
+    )
+
+    pit('[GET] /categories?main', () =>
+        xhrMock.get('/categories?main').then(data => {
+            expect(data.length).toBe(5)
+        })
+    )
+})
+
 describe('xhrMock:categories', () => {
     const categories = db['categories']
 
     pit('[GET] categories', () =>
         xhrMock.get('categories').then(data => {
+            expect(data.length).toBe(13)
             expect(data).toEqual(categories)
         })
     )
@@ -57,6 +88,7 @@ describe('xhrMock:categories', () => {
 
     pit('[GET] categories/{id}/subCategories', () =>
         xhrMock.get('categories/1/subCategories').then(data => {
+            expect(data.length).toBe(4)
             expect(data).toEqual(categories[0].subCategories)
         })
     )

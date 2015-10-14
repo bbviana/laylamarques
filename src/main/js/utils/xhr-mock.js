@@ -67,6 +67,11 @@ function promise(callback, method, url){
     });
 }
 
+// random inteiro no intervalo [0, 10.000.000]
+function generateId(){
+    return Math.floor(Math.random()*10000000);
+}
+
 /**
  * entrada: /categories/42/subCategories/20/items
  * =>: ["categories", 42, "subCategories", 20, "items"]
@@ -77,13 +82,17 @@ function promise(callback, method, url){
  * ]
  */
 function navigate(url){
-    let parts = url.split("/").filter(it => it !== "");
+    let parts = url.split("?");
+    let uri = parts[0];
+    let uriParts = uri.split("/").filter(notEmpty);
+    let args = extarctArgs(parts[1]);
+
     let collectionsIds = [];
 
-    for(let i = 0; i < parts.length; i =  i + 2){
+    for(let i = 0; i < uriParts.length; i =  i + 2){
         collectionsIds.push({
-            collection: parts[i],
-            id: parts[i + 1] && parseInt(parts[i + 1])
+            collection: uriParts[i],
+            id: uriParts[i + 1] && parseInt(uriParts[i + 1])
         });
     }
 
@@ -106,12 +115,34 @@ function navigate(url){
 
     if(!collection) throw new Error("");
 
+    // filter
+    if(!element && args.length > 0){
+        collection = collection.filter(it =>
+            args.every(arg => arg.value == toStr(it[arg.name]))
+        )
+        if(collection.length == 1){
+            element = collection[0];
+        }
+    }
+
     return {collection, element};
 }
 
-function generateId(){
-    // random inteiro no intervalo [0, 10.000.000]
-    return Math.floor(Math.random()*10000000);
+// arg1=value1&arg2=value2&booleanArg
+function extarctArgs(argsStr){
+    if(!argsStr) return [];
+
+    return argsStr
+            .split('&')
+            .filter(notEmpty)
+            .map(it => {
+                let parts = it.split('=');
+                return {name: parts[0], value: parts[1] || 'true'}
+            });
 }
+
+const notEmpty = it => it !== "";
+
+const toStr = it => it == null ? null : it.toString();
 
 export default xhr

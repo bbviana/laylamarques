@@ -1,75 +1,74 @@
+const bgImages = [{
+    id: 1,
+    url: 'img/bg/1425219857.jpg'
+}, {
+    id: 2,
+    url: 'img/bg/1425219892.jpg'
+}, {
+    id: 3,
+    url: 'img/bg/1425219976.jpg'
+}, {
+    id: 4,
+    url: 'img/bg/1425221182.jpg'
+}]
+
+const subCategories = [{
+    id: 11,
+    name: "Inverno 2015"
+}, {
+    id: 12,
+    name: "Verão 2015"
+}, {
+    id: 13,
+    name: "Inverno 2014"
+}, {
+    id: 14,
+    name: "Verão 2014"
+}, {
+    id: 21,
+    name: "Óleo"
+}, {
+    id: 51,
+    name: "Grafite"
+}, {
+    id: 52,
+    name: "Aquarela"
+}, {
+    id: 53,
+    name: "Pastel"
+}]
+
+const categories = [{
+    id: 1,
+    name: "Coleções",
+    main: true,
+    subCategories: subCategories.slice(0, 4)
+}, {
+    id: 2,
+    name: "Pinturas",
+    main: true,
+    subCategories: subCategories.slice(4, 5)
+}, {
+    id: 3,
+    name: "Artesanato",
+    main: true,
+    subCategories: []
+}, {
+    id: 4,
+    name: "Customizações",
+    main: true,
+    subCategories: []
+}, {
+    id: 5,
+    name: "Desenhos",
+    main: true,
+    subCategories: subCategories.slice(5, 8)
+}]
+
 const db = {
-    "bg-images": [{
-        id: 1,
-        url: 'img/bg/1425219857.jpg'
-    }, {
-        id: 2,
-        url: 'img/bg/1425219892.jpg'
-    }, {
-        id: 3,
-        url: 'img/bg/1425219976.jpg'
-    }, {
-        id: 4,
-        url: 'img/bg/1425221182.jpg'
-    }],
+    "bg-images": bgImages,
 
-    "categories": [{
-            id: 1,
-            name: "Coleções",
-            subCategories: [{
-                id: 11,
-                name: "Inverno 2015"
-            }, {
-                id: 12,
-                name: "Verão 2015"
-            }, {
-                id: 13,
-                name: "Inverno 2014"
-            }, {
-                id: 14,
-                name: "Verão 2014"
-            }]
-        },
-
-        {
-            id: 2,
-            name: "Pinturas",
-            subCategories: [
-                {
-                    id: 21,
-                    name: "Aquarela"
-                }
-            ]
-        },
-
-
-        {
-            id: 3,
-            name: "Artesanato",
-            subCategories: []
-        },
-
-        {
-            id: 4,
-            name: "Customizações",
-            subCategories: []
-        },
-
-        {
-            id: 5,
-            name: "Desenhos",
-            subCategories: [{
-                id: 51,
-                name: "Grafite"
-            }, {
-                id: 52,
-                name: "Aquarela"
-            }, {
-                id: 53,
-                name: "Pastel"
-            }]
-        }
-    ],
+    "categories": categories.concat(subCategories),
 
     "items/category/11": {
         items: [
