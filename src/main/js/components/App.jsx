@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
-import {BackgroundService, CategoryService} from 'services'
-import {xhr} from 'utils'
-import {AddressSection, Background, ItemList, Logo, Menu, SocialInfoSection} from 'components'
+import {BackgroundService, CategoryService} from '../services'
+import {xhr} from '../utils'
+import {AddressSection, Background, ItemList, Logo, Menu, SocialInfoSection} from '../components'
 
 class App extends Component {
     state = {

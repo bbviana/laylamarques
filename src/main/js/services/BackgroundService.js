@@ -1,4 +1,4 @@
-import {xhr} from 'utils'
+import {xhr} from '../utils'
 
 class BackgroundService {
     list = () => xhr.get('bg-images')

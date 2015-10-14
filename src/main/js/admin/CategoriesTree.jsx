@@ -1,26 +1,23 @@
 import React, { PropTypes, Component } from 'react'
-import {list, save} from 'services/CategoryService'
+import {saveSubCategory, find, list, save} from '../services/CategoryService'
+
 const assign = Object.assign
 
 class CategoriesTree extends Component {
     state = { categories: [] }
 
-    componentDidMount = () =>
-        list().then(data => this.setState({categories: data}))
+    componentDidMount = () => list().then(this.setCategories)
 
-    addCategory = (category) => {
-        // save(category).then(
-        //     list().then(data => this.setState({categories: data}))
-        // )
-
-        this.state.categories.push(category)
-        this.setState({categories: this.state.categories})
-    }
+    addCategory = category =>
+        save(category).then(list().then(this.setCategories))
 
     addSubCategory = (category, subCategory) => {
-        category.children.push(subCategory)
-        this.setState({categories: this.state.categories})
+        saveSubCategory(category, subCategory).then(
+            list().then(this.setCategories)
+        )
     }
+
+    setCategories = categories => this.setState({categories})
 
     render = ({categories} = this.state) =>
         <div style={s.tree}>
@@ -44,7 +41,7 @@ const CategoryNode = ({category, addSubCategory}) =>
     <div style={s.categoryNode}>
         <Card title={category.name} style={s.categoryCard}/>
 
-        {category.children.map((subCategory, i) =>
+        {category.subCategories.map((subCategory, i) =>
             <Card title={subCategory.name} key={i}/>
         )}
 
@@ -55,6 +52,7 @@ class AddSection extends Component {
     state = { formMode: false }
 
     gotoFormMode = () => this.setState({formMode: true})
+
     leaveFormMode = () => this.setState({formMode: false})
 
     render = ({onSave} = this.props, {formMode} = this.state) =>
@@ -70,7 +68,7 @@ class AddForm extends Component {
     onSave = () => {
         this.props.onSave({
             name: this.refs.category.value,
-            children: []
+            subCategories: []
         })
         this.props.onCancel()
     }

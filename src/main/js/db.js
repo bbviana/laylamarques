@@ -1,4 +1,4 @@
-export default {
+const db = {
     "bg-images": [{
         id: 1,
         url: 'img/bg/1425219857.jpg'
@@ -107,3 +107,5 @@ export default {
     }
 
 }
+
+export default db

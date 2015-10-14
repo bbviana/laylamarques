@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import {GridRow} from 'bs-components'
+import {GridRow} from '../bs-components'
 import {CategoriesTree, CategoryAdmin, ItemAdmin} from '.'
 
 class Admin extends Component {
@@ -40,6 +40,5 @@ const s = {
 
     }
 }
-
 
 export default Admin

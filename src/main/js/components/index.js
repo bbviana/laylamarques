@@ -1,4 +1,5 @@
 import AddressSection from './AddressSection'
+import App from './App'
 import Background from './Background'
 import Icon from './Icon'
 import Img from './Img'
@@ -10,6 +11,7 @@ import SocialInfoSection from './SocialInfoSection'
 
 export {
     AddressSection,
+    App,
     Background,
     Icon,
     Img,

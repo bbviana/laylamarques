@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import CSSTransitionGroup from 'react-addons-css-transition-group'
-import {Img} from 'components'
+import {Img} from '../components'
 
 const TIME_TO_SHOW_IMAGE = 5000; //ms
 

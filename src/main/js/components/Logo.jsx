@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import Img from './Img'
+import {Img} from '.'
 
 //TODO como tornar o href automatico? ou seja, sempre enviar para contextPath?
 class Logo extends Component {

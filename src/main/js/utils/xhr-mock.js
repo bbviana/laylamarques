@@ -14,7 +14,7 @@ const xhr = {
         return promise(() => {
             let {collection, element} = navigate(url);
             return element || collection;
-        });
+        }, "GET", url);
     },
 
     // [CREATE] /categories {data}, /categories/42/subCategories {data}
@@ -24,7 +24,7 @@ const xhr = {
             data.id = generateId();
             collection.push(data);
             return data;
-        });
+        }, "POST", url);
     },
 
     // [UPDATE] /categories/42 {data}, /categories/42/subCategories/20 {data}
@@ -33,7 +33,7 @@ const xhr = {
             let {element} = navigate(url);
             Object.assign(element, data);
             return element;
-        });
+        }, "PUT", url);
     },
 
     // [DELETE] /categories/42, /categories/42/subCategories/20
@@ -43,15 +43,15 @@ const xhr = {
             let index = collection.findIndex(element => element.id == element.id);
             collection.splice(index, 1); // remove 1 element at index
             return element;
-        });
+        }, "DELETE", url);
     }
 }
 
 const REQUESTS_TIMEOUT_MS = window.REQUESTS_TIMEOUT_MS != null ? window.REQUESTS_TIMEOUT_MS : 500;
 
-function promise(callback){
+function promise(callback, method, url){
     return new Promise((resolve, reject) => {
-        console.log("Requesting...");
+        console.log(`[${method}] ${url}`);
 
         let execute = () => {
             let data = callback();

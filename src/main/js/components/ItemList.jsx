@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-import {ctx} from 'utils'
-import {Img, LightBox} from 'components'
+import {ctx} from '../utils'
+import {Img, LightBox} from '../components'
 
 class ItemList  extends Component {
 

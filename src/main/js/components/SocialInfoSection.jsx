@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import Img from './Img'
+import {Img} from '.'
 
 //TODO linkedin? loja? blog?
 class SocialInfoSection extends Component {
