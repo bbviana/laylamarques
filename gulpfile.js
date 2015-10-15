@@ -3,7 +3,6 @@ var browserify = require('browserify');
 var connect = require('gulp-connect');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-// var livereload = require('gulp-livereload');
 var notifier = require("node-notifier");
 var source = require('vinyl-source-stream');
 var watchify = require('watchify');
@@ -31,7 +30,7 @@ var build = function (watch) {
         packageCache: {},
         fullPaths: true
     });
-    //bundler.transform({global: true}, 'uglifyify');
+    // bundler.transform({global: true}, 'uglifyify');
 
     var bundle = function () {
         bundler.bundle()
@@ -45,7 +44,6 @@ var build = function (watch) {
             .pipe(source('bundle.js'))
             .pipe(gulp.dest(paths.target))
             .pipe(connect.reload());
-            // .pipe(livereload());
     };
 
     if (watch) {
@@ -73,6 +71,6 @@ gulp.task('webserver', function() {
     });
 });
 
-gulp.task('nowatch', build.bind(this, false));
+gulp.task('build', build.bind(this, false));
 gulp.task('watch', build.bind(this, true));
 gulp.task('default', ['webserver', 'watch']);
