@@ -1,16 +1,15 @@
 import React, { PropTypes, Component } from 'react'
 
 
-class ItemAdmin extends Component {
+class ItemDetails extends Component {
 
-    render = (s = this.s) =>
+    render = () =>
         <div style={s}>
             ItemAdmin
         </div>
-
-    s = {
-
-    }
 }
 
-export default ItemAdmin
+const s = { }
+
+
+export default ItemDetails

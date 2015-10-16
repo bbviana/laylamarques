@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import {GridRow} from '../bs-components'
-import {CategoriesTree, CategoryAdmin, ItemAdmin} from '.'
+import {CategoriesTree, CategoryDetails, ItemDetails} from '.'
+import {CategoryService} from '../services'
 
 class Admin extends Component {
     render = () =>
@@ -15,14 +16,24 @@ const Header = () =>
         lm
     </div>
 
-const Content = () =>
-    <div style={s.content} className="container-fluid">
-        <GridRow cols={[3, 5, 4]}>
-            <CategoriesTree />
-            <CategoryAdmin />
-            <ItemAdmin />
-        </GridRow>
-    </div>
+class Content extends Component {
+    state = {
+        category: []
+    }
+
+    componentDidMount = () =>
+        CategoryService.find(1).then(category => this.setState({category}))
+
+
+    render = ({category} = this.state) =>
+        <div style={s.content} className="container-fluid">
+            <GridRow cols={[3, 5, 4]}>
+                <CategoriesTree />
+                <CategoryDetails category={category}/>
+                <ItemDetails />
+            </GridRow>
+        </div>
+}
 
 const s = {
     admin: {},

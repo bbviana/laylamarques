@@ -12,9 +12,37 @@ const bgImages = [{
     url: 'img/bg/1425221182.jpg'
 }]
 
+
+const items = [{
+    id: 1,
+    description: 'Imagem 1',
+    image: '',
+    position: 0,
+    active: true
+}, {
+    id: 2,
+    description: 'Imagem 2',
+    image: '',
+    position: 0,
+    active: true
+}, {
+    id: 3,
+    description: 'Imagem 3',
+    image: '',
+    position: 0,
+    active: true
+}, {
+    id: 4,
+    description: 'Imagem 4',
+    image: '',
+    position: 0,
+    active: true
+}]
+
 const subCategories = [{
     id: 11,
-    name: "Inverno 2015"
+    name: "Inverno 2015",
+    items: items.slice(2, 4)
 }, {
     id: 12,
     name: "Verão 2015"
@@ -42,7 +70,8 @@ const categories = [{
     id: 1,
     name: "Coleções",
     main: true,
-    subCategories: subCategories.slice(0, 4)
+    subCategories: subCategories.slice(0, 4),
+    items: items.slice(0, 2)
 }, {
     id: 2,
     name: "Pinturas",

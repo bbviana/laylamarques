@@ -1,11 +1,11 @@
 import Admin from './Admin'
 import CategoriesTree from './CategoriesTree'
-import CategoryAdmin from './CategoryAdmin'
-import ItemAdmin from './ItemAdmin'
+import CategoryDetails from './CategoryDetails'
+import ItemDetails from './ItemDetails'
 
 export {
     Admin,
     CategoriesTree,
-    CategoryAdmin,
-    ItemAdmin
+    CategoryDetails,
+    ItemDetails
 }
