@@ -1,38 +1,47 @@
 import React, { PropTypes, Component } from 'react'
-import {saveSubCategory, find, list, save} from '../services/CategoryService'
+import {saveSubCategory, find, list, create} from '../services/CategoryService'
 
 const assign = Object.assign
 
 class CategoriesTree extends Component {
-    state = { categories: [] }
+    addCategory = (name) =>
+        create({
+            name: name,
+            subCategories: [],
+            main: true
+        })
 
-    componentDidMount = () => list().then(this.setCategories)
-
-    addCategory = category =>
-        save(category).then(list().then(this.setCategories))
-
-    addSubCategory = (category, subCategory) => {
-        saveSubCategory(category, subCategory).then(
-            list().then(this.setCategories)
-        )
-    }
-
-    selectCategory = () => {
-    // PAREI AQUI    
-    }
-
-    setCategories = categories => this.setState({categories})
-
-    render = ({categories} = this.state) =>
+    render = ({categories} = this.props) =>
         <div style={s.tree}>
             {categories.map((category, i) =>
-                <CategoryNode key={i}
-                    category={category}
-                    addSubCategory={this.addSubCategory.bind(this, category)} />
+                <CategorySection category={category} key={i} />
             )}
 
             <AddSection onSave={this.addCategory}/>
         </div>
+}
+
+class CategorySection extends Component {
+    addSubCategory = (name) =>
+        saveSubCategory(this.props.category, {name: name})
+
+    render = ({category} = this.props) =>
+        <div style={s.categoryNode}>
+            <Category style={s.categoryCard} category={category}/>
+
+            {category.subCategories.map((subCategory, i) =>
+                <Category category={subCategory} key={i} />
+            )}
+
+            <AddSection onSave={this.addSubCategory}/>
+        </div>
+}
+
+class Category extends Component {
+    loadCategory = () => find(this.props.category.id)
+
+    render = ({style, category} = this.props) =>
+        <Card style={style} title={category.name} onClick={this.loadCategory}/>
 }
 
 const Card = ({style, title, onClick}) =>
@@ -40,17 +49,6 @@ const Card = ({style, title, onClick}) =>
         {title}
     </div>
 
-
-const CategoryNode = ({category, addSubCategory}) =>
-    <div style={s.categoryNode}>
-        <Card title={category.name} style={s.categoryCard}/>
-
-        {category.subCategories.map((subCategory, i) =>
-            <Card title={subCategory.name} key={i}/>
-        )}
-
-        <AddSection onSave={addSubCategory}/>
-    </div>
 
 class AddSection extends Component {
     state = { formMode: false }
@@ -70,10 +68,7 @@ class AddSection extends Component {
 
 class AddForm extends Component {
     onSave = () => {
-        this.props.onSave({
-            name: this.refs.category.value,
-            subCategories: []
-        })
+        this.props.onSave(this.refs.category.value)
         this.props.onCancel()
     }
 

@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-
+import {CategoryService} from '../services'
 
 class CategoryDetails extends Component {
     state = {

@@ -35,7 +35,7 @@ var build = function (watch) {
     var bundle = function () {
         bundler.bundle()
             .on('error', function (error) {
-                gutil.log(gutil.colors.red(error.message));
+                gutil.log(gutil.colors.bgRed(error.message));
                 notifier.notify({
                     title: 'Error',
                     message: 'Check console for details'
