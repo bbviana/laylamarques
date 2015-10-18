@@ -12,7 +12,7 @@ class CategoryService extends Service {
 
     }
 
-    saveSubCategory = (category, subCategory) =>
+    addSubCategory = (category, subCategory) =>
         xhr.post(`/categories/${category.id}/subCategories`, subCategory).then(this.list)
 }
 

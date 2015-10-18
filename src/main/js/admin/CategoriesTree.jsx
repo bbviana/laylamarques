@@ -1,11 +1,11 @@
 import React, { PropTypes, Component } from 'react'
-import {saveSubCategory, find, list, create} from '../services/CategoryService'
+import {CategoryService} from '../services'
 
 const assign = Object.assign
 
 class CategoriesTree extends Component {
     addCategory = (name) =>
-        create({
+        CategoryService.create({
             name: name,
             subCategories: [],
             main: true
@@ -23,7 +23,7 @@ class CategoriesTree extends Component {
 
 class CategorySection extends Component {
     addSubCategory = (name) =>
-        saveSubCategory(this.props.category, {name: name})
+        CategoryService.addSubCategory(this.props.category, {name: name})
 
     render = ({category} = this.props) =>
         <div style={s.categoryNode}>
@@ -38,7 +38,7 @@ class CategorySection extends Component {
 }
 
 class Category extends Component {
-    loadCategory = () => find(this.props.category.id)
+    loadCategory = () => CategoryService.find(this.props.category.id)
 
     render = ({style, category} = this.props) =>
         <Card style={style} title={category.name} onClick={this.loadCategory}/>

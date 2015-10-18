@@ -101,6 +101,9 @@ function navigate(url){
 
     for (let ci of collectionsIds) {
         collection = element[ci.collection];
+        if(collection instanceof Function){
+            collection = collection();
+        }
 
         if(!ci.id){
             element = null;
@@ -110,7 +113,7 @@ function navigate(url){
         if(!Array.isArray(collection)) throw new Error("");
 
         element = collection.find(it => it.id == ci.id);
-        if(!element) throw new Error("Elemento ${ci} não encontrado");
+        if(!element) throw new Error(`Elemento ${ci.id} não encontrado`);
     }
 
     if(!collection) throw new Error("");
