@@ -97,7 +97,7 @@ const categories = [{
 const db = {
     "bg-images": bgImages,
 
-    "categories": () => categories.concat(subCategories),
+    "categories": categories.concat(subCategories),
 
     "items/category/11": {
         items: [

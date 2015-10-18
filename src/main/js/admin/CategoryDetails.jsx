@@ -3,6 +3,7 @@ import {CategoryService} from '../services'
 
 class CategoryDetails extends Component {
     state = {
+        id: null,
         name: null,
         items: []
     }
@@ -11,13 +12,20 @@ class CategoryDetails extends Component {
 
     onChangeName = ({target}) => this.setState({name: target.value})
 
+    onSave = (e) => {
+        e.preventDefault();
+        let {id, name} = this.state;
+        CategoryService.save({id, name})
+    }
+
     render = ({name, items} = this.state) =>
-        <div style={s.details}>
+        <form style={s.details} onSubmit={this.onSave}>
             <h2>Cetegoria</h2>
 
             <input type="text" className="form-control" value={name}
                 onChange={this.onChangeName}/>
-            <button type="button" className="btn btn-primary">
+
+            <button type="submit" className="btn btn-primary">
                 Save
             </button>
             <button type="button" className="btn">
@@ -27,7 +35,7 @@ class CategoryDetails extends Component {
             <hr/>
 
             <ItemsArea items={items}/>
-        </div>
+        </form>
 }
 
 class ItemsArea extends Component {

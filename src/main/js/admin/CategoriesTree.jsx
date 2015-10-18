@@ -67,22 +67,23 @@ class AddSection extends Component {
 }
 
 class AddForm extends Component {
-    onSave = () => {
+    onSave = (e) => {
+        e.preventDefault();
         this.props.onSave(this.refs.category.value)
         this.props.onCancel()
     }
 
     render = ({onCancel} = this.props) =>
-        <div style={s.form}>
+        <form style={s.form} onSubmit={this.onSave}>
             <input ref="category" type="text" className="form-control" autoFocus={true}/>
 
-            <button type="button" className="btn btn-primary" onClick={this.onSave}>
+            <button type="submit" className="btn btn-primary">
                 Save
             </button>
             <button type="button" className="btn" onClick={onCancel}>
                 Cancel
             </button>
-        </div>
+        </form>
 }
 
 

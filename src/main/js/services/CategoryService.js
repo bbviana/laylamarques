@@ -8,6 +8,8 @@ class CategoryService extends Service {
 
     create = (category) => xhr.post('/categories', category).then(this.list)
 
+    save = (category) => xhr.put(`/categories/${category.id}`, category).then(this.list)
+
     remove(id){
 
     }
