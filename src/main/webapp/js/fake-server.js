@@ -1,4 +1,4 @@
-import db from '../db'
+import db from './db'
 
 /*
  * url: /collection [/id] (/collection [/id])+
@@ -8,7 +8,7 @@ import db from '../db'
  * /categories/42/subCategories/20
  * /categories/42/subCategories/20/items
  */
-const xhr = {
+const server = {
     // [LIST] [FIND] /categories, /categories/42
     get(url){
         return promise(() => {
@@ -47,7 +47,8 @@ const xhr = {
     }
 }
 
-const REQUESTS_TIMEOUT_MS = window.REQUESTS_TIMEOUT_MS != null ? window.REQUESTS_TIMEOUT_MS : 500;
+// const REQUESTS_TIMEOUT_MS = window.REQUESTS_TIMEOUT_MS != null ? window.REQUESTS_TIMEOUT_MS : 500;
+const REQUESTS_TIMEOUT_MS = 500;
 
 function promise(callback, method, url){
     return new Promise((resolve, reject) => {
@@ -82,6 +83,7 @@ function generateId(){
  * ]
  */
 function navigate(url){
+    url = url.replace('/api', '');
     let parts = url.split("?");
     let uri = parts[0];
     let uriParts = uri.split("/").filter(notEmpty);
@@ -148,4 +150,4 @@ const notEmpty = it => it !== "";
 
 const toStr = it => it == null ? null : it.toString();
 
-export default xhr
+export default server
