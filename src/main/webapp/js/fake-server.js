@@ -48,7 +48,7 @@ const server = {
 }
 
 // const REQUESTS_TIMEOUT_MS = window.REQUESTS_TIMEOUT_MS != null ? window.REQUESTS_TIMEOUT_MS : 500;
-const REQUESTS_TIMEOUT_MS = 500;
+const REQUESTS_TIMEOUT_MS = 200;
 
 function promise(callback, method, url){
     return new Promise((resolve, reject) => {

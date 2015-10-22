@@ -64,11 +64,11 @@ var build = function (watch) {
 };
 
 gulp.task('webserver', function() {
-    connect.server({
-        livereload: true,
-        port: 8000,
-        root: ['webapp']
-    });
+    // connect.server({
+    //     livereload: true,
+    //     port: 8000,
+    //     root: ['webapp']
+    // });
 });
 
 gulp.task('build', build.bind(this, false));
