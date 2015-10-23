@@ -8,9 +8,8 @@ var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 
 var paths = {
-    src: './src/main/js',
-    target: './src/main/webapp/js'
-    // target: './target/laylamarques/js'
+    src: './views',
+    target: './public/js'
 };
 
 var build = function (watch) {
@@ -67,7 +66,7 @@ gulp.task('webserver', function() {
     // connect.server({
     //     livereload: true,
     //     port: 8000,
-    //     root: ['webapp']
+    //     root: ['public']
     // });
 });
 
