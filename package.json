@@ -4,8 +4,9 @@
   "description": "Portfolio Layla Marques",
   "author": "Bruno Viana bbviana@gmail.com.br",
   "scripts": {
-    "start": "node index.js",
-    "test": "jest"
+    "start": "nodemon index.js",
+    "test": "jest",
+    "watch": "gulp watch"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
@@ -15,15 +16,16 @@
     "array.prototype.find": "~1.0.0",
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
+    "mongoose": "^4.2.5",
     "photoswipe": "~4.0.7",
-    "react": "^0.14.0-rc1",
-    "react-addons-css-transition-group": "^0.14.0-rc1",
-    "react-dom": "^0.14.0-rc1",
+    "react": "^0.14.1",
+    "react-addons-css-transition-group": "^0.14.1",
+    "react-bootstrap": "^0.27.3",
+    "react-dom": "^0.14.1",
     "superagent": "~1.2.0"
   },
   "devDependencies": {
     "babel": "^5.8.23",
-    "babel-core": "^5.8.25",
     "babel-jest": "^5.3.0",
     "babelify": "~6.2.0",
     "browserify": "~11.0.0",
