@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {invariant} from '../helpers'
+import {invariant} from '../../helpers'
 
 /**
  * Form é um decorator para form com as seguintes funcionalidades:

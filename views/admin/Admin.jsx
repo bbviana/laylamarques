@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import {GridRow} from '../bs-components'
+import {Col, Grid, Row} from 'react-bootstrap'
 import {CategoriesTree, CategoryDetails, ItemDetails} from '.'
 import {CategoryController} from '../../controllers'
 
@@ -27,13 +27,19 @@ const Header = () =>
     </div>
 
 const Content = ({categories, category}) =>
-    <div style={s.content} className="container-fluid">
-        <GridRow cols={[3, 5, 4]}>
-            <CategoriesTree categories={categories}/>
-            <CategoryDetails category={category}/>
-            <ItemDetails />
-        </GridRow>
-    </div>
+    <Grid fluid>
+        <Row>
+            <Col md={3}>
+                <CategoriesTree categories={categories}/>
+            </Col>
+            <Col md={5}>
+                <CategoryDetails category={category}/>
+            </Col>
+            <Col md={4}>
+                <ItemDetails />
+            </Col>
+        </Row>
+    </Grid>
 
 
 const s = {

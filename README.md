@@ -8,30 +8,27 @@ http://fernandayamamoto.com.br/
 
 ### Client
 
-* ReactJS
+* Bootstrap
+* CSS 3
 * Ecma Script 6
 * HTML 5
-* CSS 3
-* jQuery
 * Lightbox: http://photoswipe.com/
-* Router e Fetcher implementados no projeto
+* ReactJS
+* React Bootstrap
 
 ### Server
 
-* Java 8
-* JAX-RS, Jersey
-* Servlet 3.1
-* CDI
-* MongoDB, Morphia
-* Tomcat 8
+* Express
+* NodeJS
+* MongoDB
+* Mongoose
 
-### Ambiente
+### Dev
 
-* IntelliJ
-* Gulp
+* Atom
 * Browserify
 * Babel (6to5)
-* Maven
+* Jest
 * NPM
 
 # Instalação

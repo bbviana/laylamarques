@@ -3,15 +3,11 @@
   "version": "1.0.0",
   "description": "Portfolio Layla Marques",
   "author": "Bruno Viana bbviana@gmail.com.br",
-  "scripts": {
-    "start": "nodemon index.js",
-    "test": "jest",
-    "watch": "gulp watch"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bbviana/laylamarques.git"
   },
-  "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "setupTestFrameworkScriptFile": "<rootDir>/jestEnvironment.js"
-  },
+  "license": "MIT",
   "dependencies": {
     "array.prototype.find": "~1.0.0",
     "body-parser": "^1.14.1",
@@ -28,15 +24,36 @@
     "babel": "^5.8.23",
     "babel-jest": "^5.3.0",
     "babelify": "~6.2.0",
-    "browserify": "~11.0.0",
-    "gulp": "~3.9.0",
-    "gulp-babel": "~5.2.1",
-    "gulp-connect": "^2.2.0",
-    "gulp-util": "~3.0.4",
+    "browserify": "^12.0.1",
     "jest-cli": "~0.4.0",
-    "node-notifier": "~4.2.1",
-    "uglifyify": "~3.0.1",
-    "vinyl-source-stream": "~1.1.0",
-    "watchify": "~3.1.1"
+    "live-reload": "^1.1.0",
+    "minifyify": "^7.1.0",
+    "parallelshell": "^2.0.0",
+    "watchify": "^3.6.0"
+  },
+  "scripts": {
+    "clean": "rm -rf public/js/*",
+    "build": "npm run build:js",
+    "build:js": "browserify views/main.jsx -d --extension=jsx -o public/js/bundle.js -p [minifyify --compressPath . --no-map]",
+    "watch:build": "watchify views/main.jsx -v -d --extension=jsx --o public/js/bundle.js",
+    "watch": "npm run watch:build",
+    "livereload": "live-reload --port 35729 public/",
+    "start": "nodemon index.js",
+    "test": "jest",
+    "dev": "parallelshell 'npm run livereload' 'npm run watch' 'npm start'"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "stage": 0
+        }
+      ]
+    ]
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "setupTestFrameworkScriptFile": "<rootDir>/jestEnvironment.js"
   }
 }

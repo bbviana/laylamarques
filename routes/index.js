@@ -1,4 +1,5 @@
 import express from 'express'
+import categories from './categories'
 
 const router = express.Router()
 
@@ -12,4 +13,7 @@ router.get('/', (req, res) => {
     res.json({message: 'OK'})
 })
 
-export default router
+export {
+    index: router,
+    categories: categories
+}

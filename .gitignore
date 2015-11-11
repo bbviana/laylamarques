@@ -1,3 +1,4 @@
 # Geral
 node_modules/*
-bundle.js
+public/js/*
+npm-debug*
