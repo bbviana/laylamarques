@@ -1,6 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import {server} from './services'
+import server from './fake-server'
 
 const router = express.Router();
 router

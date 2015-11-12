@@ -48,7 +48,7 @@ const Header = () =>
         <NavBrand>
             <a href="?login">Remo meu Rumo</a>
         </NavBrand>
-        <Nav right eventKey={0}> {/* This is the eventKey referenced */}
+        <Nav right eventKey={0}>
             <NavItem eventKey={1} href="?alunos">
                 <Glyphicon glyph="fire"/>
             </NavItem>

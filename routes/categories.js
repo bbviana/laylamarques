@@ -33,7 +33,7 @@ const router = new Router()
         category.main = req.body.main
 
         category.save(err => {
-            if (err) res.send(err)
+            err && res.send(err)
             res.json({ message: 'category created!' })
         })
     })

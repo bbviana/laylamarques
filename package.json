@@ -32,15 +32,15 @@
     "watchify": "^3.6.0"
   },
   "scripts": {
-    "clean": "rm -rf public/js/*",
-    "build": "npm run build:js",
-    "build:js": "browserify views/main.jsx -d --extension=jsx -o public/js/bundle.js -p [minifyify --compressPath . --no-map]",
-    "watch:build": "watchify views/main.jsx -v -d --extension=jsx --o public/js/bundle.js",
-    "watch": "npm run watch:build",
-    "livereload": "live-reload --port 35729 public/",
-    "start": "nodemon index.js",
-    "test": "jest",
-    "dev": "parallelshell 'npm run livereload' 'npm run watch' 'npm start'"
+    "clean": "scripts/clean.sh",
+    "build": "scripts/build.sh",
+    "build:js": "scripts/build-js.sh",
+    "watch:build": "scripts/watch-build.sh",
+    "watch": "scripts/watch.sh",
+    "livereload": "scripts/live-reload.sh",
+    "start": "scripts/start.sh",
+    "test": "scripts/test.sh",
+    "dev": "scripts/dev.sh"
   },
   "browserify": {
     "transform": [
@@ -54,6 +54,6 @@
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "setupTestFrameworkScriptFile": "<rootDir>/jestEnvironment.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/scripts/jest-environment.js"
   }
 }

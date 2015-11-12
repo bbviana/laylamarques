@@ -1,5 +1,5 @@
 const db = require('../db')
-const fakeServer = require('../services/fake-server')
+const fakeServer = require('../fake-server')
 
 describe('fakeServer:bg-images', () => {
     const bgImages = db['bg-images']

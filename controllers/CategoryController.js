@@ -1,5 +1,4 @@
-import Controller from './Controller'
-import {Request} from '../helpers'
+import {Controller, Request} from '../helpers'
 
 class CategoryController extends Controller {
     list = () => Request.get('/api/categories?main=true').then(categories => this.dispatch({categories}))
