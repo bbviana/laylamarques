@@ -1,8 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {Button, Col, Glyphicon, Input, MenuItem, Modal, Nav, Navbar, NavBrand, NavItem, NavDropdown, Pagination,
         Row, Table} from 'react-bootstrap'
-import {Form} from '../components'
-
+import {Form} from '.'
 
 class Crud extends Component {
     constructor(props){
@@ -113,8 +112,8 @@ const ListSection = ({controller, schema, list, currentPage, totalPages, pageSiz
                 <tr key={i}>
                     {schema.body(element).props.children}
                     <td>
-                        <EditButton controller={controller} id={element.id} />
-                        <RemoveButton controller={controller} id={element.id} />
+                        <EditButton controller={controller} id={element._id} />
+                        <RemoveButton controller={controller} id={element._id} />
                     </td>
                 </tr>
             )}

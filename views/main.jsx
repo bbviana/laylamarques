@@ -1,10 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {App} from './site'
-import {Admin} from './admin'
+// import {App} from './site'
+// import {Admin} from './admin'
+import Categories from './admin/Categories'
 
-if(window.location.search === "?admin"){
-    ReactDOM.render(<Admin />, document.getElementById("app"));
-} else {
-    ReactDOM.render(<App />, document.getElementById("app"));
-}
+ReactDOM.render(<Categories />, document.getElementById("app"));
+
+// if(window.location.search === "?admin"){
+//     ReactDOM.render(<Admin />, document.getElementById("app"));
+// } else {
+//     ReactDOM.render(<App />, document.getElementById("app"));
+// }

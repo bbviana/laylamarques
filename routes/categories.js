@@ -5,13 +5,13 @@ const router = new Router()
     .get('/', (req, res) => {
         Category.find((err, categories) => {
             err && res.send(err)
-            res.json(categories)
+            res.json({data: categories, paging: {}})
        })
     })
     .get('/:id', (req, res) => {
         Category.findById(req.params.id, (err, category) => {
             err && res.send(err)
-            res.json(category)
+            res.json({data: category})
        })
     })
     .put('/:id', (req, res) => {

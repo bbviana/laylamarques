@@ -1,9 +1,10 @@
-import {Controller, Request} from '../helpers'
+import Controller from './Controller'
+import Request from './Request'
 
 class CrudController extends Controller {
     constructor(url){
-        super();
-        this.url = url;
+        super()
+        this.url = url
     }
 
     state = {
@@ -60,8 +61,8 @@ class CrudController extends Controller {
 
     save = () => {
         const {form} =  this.state;
-        if(form.id) {
-            Request.put(`api/${this.url}/${form.id}`, form).then(() => this.list())
+        if(form._id) {
+            Request.put(`api/${this.url}/${form._id}`, form).then(() => this.list())
         } else {
             Request.post(`api/${this.url}`, form).then(() => this.list())
         }
@@ -89,4 +90,3 @@ class CrudController extends Controller {
 }
 
 export default CrudController
-

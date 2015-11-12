@@ -10,8 +10,8 @@ class Admin extends Component {
     }
 
     componentDidMount = () => {
-        CategoryController.listen(this);
-        CategoryController.list();
+        CategoryController.listen(this)
+        CategoryController.list()
     }
 
     render = ({categories, category} = this.state) =>
