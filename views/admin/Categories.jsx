@@ -13,13 +13,11 @@ class Categories extends Component {
     listSchema = {
         header: () =>
             <tr>
-                <th>ID</th>
                 <th>Nome</th>
             </tr>,
 
         body: (category) =>
             <tr>
-                <td>{category._id}</td>
                 <td>{category.name}</td>
             </tr>
     }

@@ -8,11 +8,27 @@ const router = new Router()
             res.json({data: categories, paging: {}})
        })
     })
+    .get('/blank', (req, res) => {
+        const category = new Category()
+        category._id = null
+        res.json({data: category})
+    })
     .get('/:id', (req, res) => {
         Category.findById(req.params.id, (err, category) => {
             err && res.send(err)
             res.json({data: category})
        })
+    })
+    .post('/', (req, res) => {
+        const category = new Category()
+        category.name = req.body.name
+        category.main = req.body.main
+
+        category.save(err => {
+            err && res.send(err)
+            res.end()
+        })
+
     })
     .put('/:id', (req, res) => {
         Category.findById(req.params.id, (err, category) => {
@@ -23,24 +39,14 @@ const router = new Router()
 
             category.save(err => {
                 err && res.send(err)
-                res.json({ message: `Category ${req.params.id} updated!`})
+                res.end()
            })
        })
-    })
-    .post('/', (req, res) => {
-        const category = new Category()
-        category.name = req.body.name
-        category.main = req.body.main
-
-        category.save(err => {
-            err && res.send(err)
-            res.json({ message: 'category created!' })
-        })
     })
     .delete('/:id', (req, res) => {
         Category.remove({_id: req.params.id}, (err, category) => {
             err && res.send(err)
-            res.json({ message: `Category ${req.params.id} deleted!` })
+            res.end()
        })
     })
 

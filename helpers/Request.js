@@ -8,7 +8,7 @@ class Request {
     static get = url => promise("GET", url)
     static post = (url, data) => promise("POST", url, data)
     static put = (url, data) => promise("PUT", url, data)
-    static delete = url => promise("DELETE", url)
+    static del = url => promise("DELETE", url)
 }
 
 function promise(method, url, data){
