@@ -6,7 +6,7 @@
  * Evita excções undefined
  */
 function id(bean){
-    return bean && bean.id
+    return bean && bean._id
 }
 
 /**
@@ -16,7 +16,7 @@ function id(bean){
  * Evita exceções undefined
  */
 function ids(beans){
-    return beans && beans.map(bean => bean.id)
+    return beans && beans.map(bean => bean._id)
 }
 
 
@@ -43,9 +43,9 @@ function handleAssociationChange(event) {
     if (target.multiple) {
         value = Array.from(target.options)
             .filter(option => option.selected)
-            .map(option => ({id: option.value}))
+            .map(option => ({_id: option.value}))
     } else {
-        value = {id: target.value}
+        value = {_id: target.value}
     }
 
     if(!target.value){

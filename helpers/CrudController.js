@@ -22,13 +22,15 @@ class CrudController extends Controller {
     }
 
     list = (args = {}) => {
-        const page = args.page || 1;
-        const pageSize = args.pageSize || this.state.pageSize;
+        const page = args.page || 1
+        const pageSize = args.pageSize || this.state.pageSize
         const query = {
             count:pageSize,
-            page: page,
-            "search.nome": this.state.search.nome
-        };
+            page: page
+        }
+        
+        const {search} =  this.state
+        Object.assign(query, search)
 
         Request.get(`api/${this.url}/`, query).then(
             ({data, paging}) => this.dispatch({
@@ -60,7 +62,7 @@ class CrudController extends Controller {
     }
 
     save = () => {
-        const {form} =  this.state;
+        const {form} =  this.state
         if(form._id) {
             Request.put(`api/${this.url}/${form._id}`, form).then(() => this.list())
         } else {
@@ -79,12 +81,12 @@ class CrudController extends Controller {
     }
 
     changeForm = (newValue) => {
-        Object.assign(this.state.form, newValue);
+        Object.assign(this.state.form, newValue)
         this.emitChange();
     }
 
     changeSearch = (newValue) => {
-        Object.assign(this.state.search, newValue);
+        Object.assign(this.state.search, newValue)
         this.emitChange();
     }
 }

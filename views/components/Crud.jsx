@@ -28,8 +28,7 @@ class Crud extends Component {
                              totalPages={this.state.totalPages}
                              pageSize={this.state.pageSize}/>
 
-                <NewButton controller={controller}
-                           label={title}/>
+                <NewButton controller={controller} />
             </Content>
 
             <FormSection controller={controller}
@@ -133,9 +132,9 @@ const SearchButton = () =>
         <Glyphicon glyph="search"/> Buscar
     </Button>
 
-const NewButton = ({controller, label}) =>
+const NewButton = ({controller}) =>
     <Button style={styles.newButton} bsStyle="primary" onClick={() => controller.blank()}>
-        <Glyphicon glyph="plus-sign"/> Novo {label}
+        <Glyphicon glyph="plus-sign"/> Novo
     </Button>
 
 const EditButton = ({controller, id}) =>
